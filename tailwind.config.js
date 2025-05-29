@@ -1,14 +1,11 @@
-const { plugin } = require("postcss");
-
 module.exports = {
     content: [
-        "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-        "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-        "./src/app/**/*.{js,ts,jsx,tsx,mdx}"
+        './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+        './src/components/**/*.{js,ts,tsx,jsx,mdx}',
+        './src/app/**/*.{js,ts,tsx,jsx,mdx}'
     ],
     theme: {
-        // tamanhos de telas para fazer a responsividade
-        screen: {
+        screens: {
             mb: "429px",
             sm: "640px",
             md: "768px",
@@ -20,12 +17,12 @@ module.exports = {
         },
         extend: {
             colors: {
-                "color-primary": "#7A00c0",
+                "color-primary": "#7A00C0",
                 "color-second": "#50236A",
-                "color-third": "#36005A",
+                "color-third": "#39005A",
                 "dark-gray": "#5A5A5A",
                 "gray-70": "#646E82",
-                "red-error": "#ED3A3A",
+                "red-error": "#ED3A3A"
             }
         }
     },
