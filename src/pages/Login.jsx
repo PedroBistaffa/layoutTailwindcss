@@ -1,10 +1,40 @@
 import { useState } from "react";
+import { users } from "../data/users-constat";
+import { useNavigate } from "react-router-dom";
+import { login } from "../utils/storage";
 
 function Login() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
-    console.log(email)
-    console.log(senha)
+    const [error, setError] = useState("");
+    // console.log(email)
+    // console.log(senha)
+    const navigate = useNavigate();
+    
+    function handleLogin() {
+        // const userFound = users.filter(user => user.email === email);
+        const userFound = users.find(user => user.email.toLowerCase() === email.toLowerCase().trim());
+        console.log(userFound);
+        // null
+        // undefined
+        // 0
+        if(userFound) {
+            const match = senha === userFound.senha
+            if(match) {
+                // Usuario autenticado
+                setError("")
+                login(JSON.stringify(userFound))
+                navigate("/painel");
+                return;
+            }
+            // Senha invalida
+            setError("Senha invalida")
+            return;
+        }
+        // Usuario não encontrado
+        setError("Usuario não encontrado")
+        return;
+    }
 
     return(
         <div className="flex flex-grow shadow m-6 rounded-[12px] bg-slate-200 justify-center items-center">
@@ -24,8 +54,10 @@ function Login() {
                     value={senha}
                     onChange={(e) => setSenha(e.target.value)}/>
                 </div>
-                <span>Esqueceu a sua senha?</span>
-                <button className="
+                <span>Esqueceu sua Senha?</span>
+                <button 
+                onClick={handleLogin}
+                className="
                  text-white
                  hover:bg-color-second
                  bg-color-primary 
@@ -34,6 +66,7 @@ function Login() {
                  rounded-[8px] 
                  min-h-[40px]"
                  >Entrar</button>
+                 <span className="text-red-error">{error}</span>
             </div>
         </div>
     )

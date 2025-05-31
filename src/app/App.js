@@ -10,6 +10,7 @@ import Suporte from "../pages/Suporte";
 import Solucoes from "../pages/Solucoes";
 import Painel from "../pages/Painel";
 import Login from "../pages/Login";
+import PrivateRoute from "../components/Auth";
 
 function App() {
   
@@ -20,11 +21,15 @@ function App() {
         <Header/>
         <main className="flex flex-grow container mx-auto p-4 mt-[100px]">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/sobre" element={<Sobre />} />
-            <Route path="/suporte" element={<Suporte />} />
-            <Route path="/solucoes" element={<Solucoes />} />
-            <Route path="/painel" element={<Painel />} /> 
+            <Route path="/" element = {<Home />} />
+            <Route path="/sobre" element = {<Sobre />} />
+            <Route path="/suporte" element = {<Suporte />} />
+            <Route path="/solucoes" element = {<Solucoes />} />
+            <Route path="/painel" element = {
+              <PrivateRoute>
+              <Painel />
+              </PrivateRoute>
+            } /> 
             <Route path="/login" element={<Login />} /> 
           </Routes>
         </main>

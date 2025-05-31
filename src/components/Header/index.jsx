@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { isAuthenticated, logout } from "../../utils/storage";
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -7,6 +8,8 @@ const Header = () => {
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     }
+
+    const navigate = useNavigate();
 
     return(
         <header className="flex flex-col w-full h-[100px] bg-transparent absolute top-0 z-10">
@@ -41,6 +44,17 @@ const Header = () => {
                         </li>
                     </ul>
                 </div>
+                {isAuthenticated() && 
+                <div className="flex justify-center items-center">
+                  <button className="
+                  bg-color-primary
+                  text-white
+                  font-bold p-3 rounded-[8px]"
+                  onClick={() =>{logout(); navigate("/login")}}>
+                    Logout
+                  </button>
+                </div>
+                } 
             </nav>
             {/* menu lateral mobile */}
             <div
